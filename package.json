@@ -1,0 +1,21 @@
+{
+  "name": "@dyesoft/alea-core",
+  "version": "0.1.0",
+  "description": "Core classes and utilities for the Alea game engine",
+  "main": "src/index.js",
+  "module": "src/main.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "William Dye",
+    "email": "william@williamdye.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "esm": "^3.2.25"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
