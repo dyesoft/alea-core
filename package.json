@@ -11,6 +11,10 @@
     "name": "William Dye",
     "email": "william@williamdye.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/will2dye4/alea-core.git"
+  },
   "license": "MIT",
   "dependencies": {
     "esm": "^3.2.25"
