@@ -1,0 +1,15 @@
+import { SECONDS_PER_MONTH } from './time.mjs';
+
+export const MIN_PLAYER_NAME_LENGTH = 1;
+export const MAX_PLAYER_NAME_LENGTH = 10;
+
+export const MAX_EMAIL_LENGTH = 128;
+
+export const MAX_ROOM_REQUEST_NAME_LENGTH = 64;
+
+export const MAX_PASSWORD_LENGTH = 128;
+
+export const MAX_KICK_DURATION_SECONDS = SECONDS_PER_MONTH;
+
+export const ROOM_CODE_LENGTH = 4;
+export const ROOM_CODE_CHARACTERS = 'ABCDEFGHJKLMNPQRSTVWXYZ';

@@ -1,2 +1,3 @@
 // ESM syntax is supported.
-export * as constants from './constants.mjs';
+export * from './constants/index.mjs';
+export * as constants from './constants/index.mjs';
