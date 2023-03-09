@@ -1,3 +1,4 @@
+/* Mapping of status codes used to indicate the outcome of handling an event or request. */
 export const StatusCodes = {
   /* success codes */
   NO_CONTENT: 204,

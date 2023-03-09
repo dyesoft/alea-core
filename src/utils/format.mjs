@@ -1,5 +1,6 @@
 const DEFAULT_LOCALE = 'en';
 
+/* Format a date (string or Date object) in a user-friendly way. */
 export function formatDate(date, fullMonthName = false) {
   if (typeof date === 'string') {
     date = new Date(date);
@@ -11,6 +12,7 @@ export function formatDate(date, fullMonthName = false) {
   return `${month} ${day}, ${year}`;
 }
 
+/* Return the full name of the weekday (e.g., "Thursday") for the given date (string or Date object). */
 export function formatWeekday(date) {
   if (typeof date === 'string') {
     date = new Date(date);
@@ -18,6 +20,7 @@ export function formatWeekday(date) {
   return new Intl.DateTimeFormat(DEFAULT_LOCALE, {weekday: 'long', timeZone: 'GMT'}).format(date);
 }
 
+/* Given a numeric score, format the score in a user-friendly way with an optional prefix ("$" by default). */
 export function formatScore(score, prefix = '$') {
   score = score || 0;
   const scoreString = score.toLocaleString();
@@ -27,6 +30,7 @@ export function formatScore(score, prefix = '$') {
   return prefix + scoreString;
 }
 
+/* Given an array of values, format the values in a user-friendly way. */
 export function formatList(items) {
   items = items || [];
   let result = '';

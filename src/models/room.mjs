@@ -3,10 +3,12 @@ import uuid from 'uuid';
 import { ROOM_CODE_LENGTH, PASSWORD_SALT_ROUNDS, ROOM_CODE_CHARACTERS } from '../constants/index.mjs';
 import { isSuperset } from '../utils/common.mjs';
 
+/* Validate that a room code is defined, has an acceptable length, and doesn't contain any invalid letters. */
 export function validateRoomCode(roomCode) {
   return (!!roomCode && roomCode?.length === ROOM_CODE_LENGTH && isSuperset(new Set(ROOM_CODE_CHARACTERS), new Set(roomCode)));
 }
 
+/* A room represents a private space for a group of players to play games together in isolation from other players. */
 export class Room {
   constructor(roomCode, ownerPlayerID, password) {
     this.roomID = uuid.v4();
