@@ -26,3 +26,7 @@ Alternatively, if you're using [Yarn](https://yarnpkg.com/) instead of NPM:
 ```
 $ yarn add @dyesoft/alea-core
 ```
+
+## License
+
+This software is [MIT licensed](./LICENSE).
