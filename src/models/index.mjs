@@ -1,5 +1,5 @@
 export * from './common.mjs';
-export * as common from './common.mjs';
+export * as commonModels from './common.mjs';
 
 export * from './game.mjs';
 export * as game from './game.mjs';
