@@ -1,11 +1,12 @@
 import bcrypt from 'bcryptjs';
 import uuid from 'uuid';
-import { ROOM_CODE_LENGTH, PASSWORD_SALT_ROUNDS, ROOM_CODE_CHARACTERS } from '../constants/index.mjs';
-import { isSuperset } from '../utils/common.mjs';
+import { ROOM_CODE_LENGTH, PASSWORD_SALT_ROUNDS } from '../constants/index.mjs';
 
-/* Validate that a room code is defined, has an acceptable length, and doesn't contain any invalid letters. */
+const ROOM_CODE_PATTERN = /^[A-Z0-9]+$/;
+
+/* Validate that a room code is defined, has an acceptable length, and doesn't contain any invalid characters. */
 export function validateRoomCode(roomCode) {
-  return (!!roomCode && roomCode?.length === ROOM_CODE_LENGTH && isSuperset(new Set(ROOM_CODE_CHARACTERS), new Set(roomCode)));
+  return (!!roomCode && roomCode?.length === ROOM_CODE_LENGTH && ROOM_CODE_PATTERN.test(roomCode));
 }
 
 /* A room represents a private space for a group of players to play games together in isolation from other players. */

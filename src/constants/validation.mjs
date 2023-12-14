@@ -18,5 +18,5 @@ export const MAX_KICK_DURATION_SECONDS = SECONDS_PER_MONTH;
 
 /* Room codes must be 4 characters long. */
 export const ROOM_CODE_LENGTH = 4;
-/* Exclude some letters from room codes because they look like other letters or numbers (I, O, and U). */
+/* Exclude some letters from random room codes because they look like other letters or numbers (I, O, and U). */
 export const ROOM_CODE_CHARACTERS = 'ABCDEFGHJKLMNPQRSTVWXYZ';

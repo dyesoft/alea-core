@@ -46,12 +46,14 @@ describe('validateRoomCode', () => {
     ['ABC', false],    // too short
     ['ABCD', true],
     ['GAME', true],
+    ['UNDO', true],
+    ['AZ49', true],
+    ['1234', true],
     ['GAMER', false],  // too long
     ['GAMERS', false], // too long
-    ['MOST', false],   // invalid letters
-    ['JIVE', false],   // invalid letters
-    ['UNDO', false],   // invalid letters
-    ['AIOU', false],   // invalid letters
+    ['MO$T', false],   // invalid character ($)
+    ['J!V3', false],   // invalid character (!)
+    [' _^#', false],   // invalid characters
   ])('validateRoomCode(%p) => %p', (roomCode, expected) => {
     expect(validateRoomCode(roomCode)).toEqual(expected);
   });
