@@ -23,6 +23,24 @@ export function validatePlayerName(name) {
     return (!!name && name?.length >= MIN_PLAYER_NAME_LENGTH && name?.length <= MAX_PLAYER_NAME_LENGTH);
 }
 
+/* Mapping of keys (names) used in player statistics. */
+export const PlayerStatsKeys = {
+    GAMES_PLAYED: 'gamesPlayed',
+    GAMES_WON: 'gamesWon',
+    HIGHEST_GAME_SCORE: 'highestGameScore',
+    OVERALL_SCORE: 'overallScore',
+};
+
+/* The set of statistics that are maintained for each player. */
+export class PlayerStatistics {
+    constructor() {
+        this[PlayerStatsKeys.GAMES_PLAYED] = 0;
+        this[PlayerStatsKeys.GAMES_WON] = 0;
+        this[PlayerStatsKeys.HIGHEST_GAME_SCORE] = 0;
+        this[PlayerStatsKeys.OVERALL_SCORE] = 0;
+    }
+}
+
 /* A player contains fields necessary for keeping track of an individual player in a game or room. */
 export class Player {
     constructor(name, email, spectating) {
@@ -34,5 +52,6 @@ export class Player {
         this.active = true;
         this.createdTime = new Date();
         this.lastConnectionTime = new Date();
+        this.stats = new PlayerStatistics();
     }
 }

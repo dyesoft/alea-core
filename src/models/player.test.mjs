@@ -1,5 +1,12 @@
 import { describe, expect, test } from '@jest/globals';
-import { comparePlayerEntries, comparePlayerNames, Player, validatePlayerName } from './player.mjs';
+import {
+    comparePlayerEntries,
+    comparePlayerNames,
+    Player,
+    PlayerStatistics,
+    PlayerStatsKeys,
+    validatePlayerName,
+} from './player.mjs';
 
 describe('comparePlayerEntries', () => {
     test('compares entries by name', () => {
@@ -41,6 +48,13 @@ describe('validatePlayerName', () => {
     });
 });
 
+describe('PlayerStatistics', () => {
+    test('constructor', () => {
+        const stats = new PlayerStatistics();
+        verifyPlayerStatistics(stats);
+    });
+});
+
 describe('Player', () => {
     const name = 'Test';
     const email = 'test@example.com';
@@ -63,6 +77,15 @@ describe('Player', () => {
     });
 });
 
+function verifyPlayerStatistics(stats) {
+    expect(stats).toEqual({
+        [PlayerStatsKeys.GAMES_PLAYED]: 0,
+        [PlayerStatsKeys.GAMES_WON]: 0,
+        [PlayerStatsKeys.HIGHEST_GAME_SCORE]: 0,
+        [PlayerStatsKeys.OVERALL_SCORE]: 0,
+    });
+}
+
 function verifyPlayer(player, expectedName, expectedEmail, expectedSpectating) {
     expect(player.playerID).toBeDefined();
     expect(player.currentRoomID).toBeNull();
@@ -72,4 +95,5 @@ function verifyPlayer(player, expectedName, expectedEmail, expectedSpectating) {
     expect(player.active).toBe(true);
     expect(player.createdTime).toBeDateWithinTolerance();
     expect(player.lastConnectionTime).toBeDateWithinTolerance();
+    verifyPlayerStatistics(player.stats);
 }
