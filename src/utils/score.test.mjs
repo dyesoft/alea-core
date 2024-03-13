@@ -1,5 +1,10 @@
 import { describe, expect, test } from '@jest/globals';
-import { getCurrentChampion, getCurrentPlaces, getPlaces } from './score.mjs';
+import {getAugmentedPlayerStats, getCurrentChampion, getCurrentPlaces, getPlaces, LeaderboardKeys} from './score.mjs';
+import {PlayerStatistics, PlayerStatsKeys} from "../models/index.mjs";
+
+function playerScore(game, player) {
+    return {playerID: player.playerID, name: player.name, score: game.scores[player.playerID] || 0};
+}
 
 describe('getPlaces', () => {
     const loser1 = {playerID: 'loser1', name: 'Loser 1', score: 1000};
@@ -132,6 +137,24 @@ describe('getCurrentChampion', () => {
     })
 });
 
-function playerScore(game, player) {
-    return {playerID: player.playerID, name: player.name, score: game.scores[player.playerID] || 0};
-}
+describe('getAugmentedPlayerStats', () => {
+    test('computes ratios if denominators are not zero', () => {
+        const stats = new PlayerStatistics();
+        stats[PlayerStatsKeys.GAMES_PLAYED] = 4;
+        stats[PlayerStatsKeys.GAMES_WON] = 2;
+        stats[PlayerStatsKeys.HIGHEST_GAME_SCORE] = 150;
+        stats[PlayerStatsKeys.OVERALL_SCORE] = 400;
+        const augmentedStats = getAugmentedPlayerStats(stats);
+        Object.values(PlayerStatsKeys).forEach(key => expect(augmentedStats[key]).toEqual(stats[key]));
+        expect(augmentedStats[LeaderboardKeys.AVERAGE_SCORE]).toEqual(100);
+        expect(augmentedStats[LeaderboardKeys.WINNING_PERCENTAGE]).toEqual(50);
+    });
+
+    test('defaults ratios to zero if denominators are zero', () => {
+        const stats = new PlayerStatistics();
+        const augmentedStats = getAugmentedPlayerStats(stats);
+        Object.values(PlayerStatsKeys).forEach(key => expect(augmentedStats[key]).toEqual(stats[key]));
+        expect(augmentedStats[LeaderboardKeys.AVERAGE_SCORE]).toEqual(0);
+        expect(augmentedStats[LeaderboardKeys.WINNING_PERCENTAGE]).toEqual(0);
+    });
+});

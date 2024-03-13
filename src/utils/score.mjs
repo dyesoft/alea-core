@@ -1,3 +1,13 @@
+import { PlayerStatsKeys } from '../models/index.mjs';
+
+/* Mapping of keys (names) used in leaderboard statistics. */
+export const LeaderboardKeys = {
+    AVERAGE_SCORE: 'averageScore',
+    HIGHEST_GAME_SCORE: PlayerStatsKeys.HIGHEST_GAME_SCORE,
+    OVERALL_SCORE: PlayerStatsKeys.OVERALL_SCORE,
+    WINNING_PERCENTAGE: 'winningPercentage',
+};
+
 const PLACE_NAMES = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', 'Honorable Mention'];
 const MAX_PLACE_INDEX = PLACE_NAMES.length - 1;
 
@@ -49,4 +59,20 @@ export function getPlaces(scores) {
 export function getCurrentChampion(places) {
     const winners = places[Object.keys(places)[0]];
     return (winners.length === 1 ? winners[0].playerID : null);
+}
+
+/* Given a player's statistics, return an augmented copy of the stats including computed leaderboard stats. */
+export function getAugmentedPlayerStats(playerStats) {
+    const overallScore = playerStats[PlayerStatsKeys.OVERALL_SCORE] || 0;
+    const highestGameScore = playerStats[PlayerStatsKeys.HIGHEST_GAME_SCORE] || 0;
+    const gamesPlayed = playerStats[PlayerStatsKeys.GAMES_PLAYED] || 0;
+    const gamesWon = playerStats[PlayerStatsKeys.GAMES_WON] || 0;
+    return {
+        [PlayerStatsKeys.GAMES_PLAYED]: gamesPlayed,
+        [PlayerStatsKeys.GAMES_WON]: gamesWon,
+        [LeaderboardKeys.AVERAGE_SCORE]: Math.round(gamesPlayed === 0 ? 0 : (overallScore / gamesPlayed)),
+        [LeaderboardKeys.HIGHEST_GAME_SCORE]: highestGameScore,
+        [LeaderboardKeys.OVERALL_SCORE]: overallScore,
+        [LeaderboardKeys.WINNING_PERCENTAGE]: Math.round((gamesPlayed === 0 ? 0 : (gamesWon / gamesPlayed)) * 100),
+    };
 }
