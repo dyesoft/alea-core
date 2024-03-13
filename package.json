@@ -1,6 +1,6 @@
 {
   "name": "@dyesoft/alea-core",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Core classes and utilities for the Alea game engine",
   "keywords": [
     "alea",
