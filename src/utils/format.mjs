@@ -6,10 +6,29 @@ export function formatDate(date, fullMonthName = false) {
         date = new Date(date);
     }
     const monthOption = (fullMonthName ? 'long' : 'short');
-    const month = new Intl.DateTimeFormat(DEFAULT_LOCALE, {month: monthOption, timeZone: 'GMT'}).format(date);
-    const day = new Intl.DateTimeFormat(DEFAULT_LOCALE, {day: 'numeric', timeZone: 'GMT'}).format(date);
-    const year = new Intl.DateTimeFormat(DEFAULT_LOCALE, {year: 'numeric', timeZone: 'GMT'}).format(date);
-    return `${month} ${day}, ${year}`;
+    return new Intl.DateTimeFormat(DEFAULT_LOCALE, {
+        month: monthOption,
+        day: 'numeric',
+        year: 'numeric',
+        timeZone: 'GMT',
+    }).format(date);
+}
+
+/* Format a date and time (string or Date object) in a user-friendly way. */
+export function formatDateAndTime(date, fullMonthName = false) {
+    if (typeof date === 'string') {
+        date = new Date(date);
+    }
+    const monthOption = (fullMonthName ? 'long' : 'short');
+    return new Intl.DateTimeFormat(DEFAULT_LOCALE, {
+        month: monthOption,
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        timeZone: 'GMT',
+    }).format(date);
 }
 
 /* Return the full name of the weekday (e.g., "Thursday") for the given date (string or Date object). */

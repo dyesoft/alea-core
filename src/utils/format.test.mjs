@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import { formatDate, formatList, formatScore, formatWeekday } from './format.mjs';
+import { formatDate, formatDateAndTime, formatList, formatScore, formatWeekday } from './format.mjs';
 
 describe('formatDate', () => {
     const date = new Date(1991, 3, 18);
@@ -29,6 +29,27 @@ describe('formatDate', () => {
         [fullDateStringMidnightUTC, true, expectedDateWithFullMonth],
     ])('formatDate(%p, %p) => %p', (date, fullMonthName, expected) => {
         expect(formatDate(date, fullMonthName)).toEqual(expected);
+    });
+});
+
+describe('formatDateAndTime', () => {
+    const dateAndTime = new Date(1991, 3, 18, 11, 22, 33);
+    const dateAndTimeUTC = new Date(Date.UTC(1991, 3, 18, 11, 22, 33));
+    const dateAndTimeString = '1991-04-18T11:22:33Z';
+    const expectedDateAndTime = 'Apr 18, 1991, 3:22:33 PM';
+    const expectedDateAndTimeUTC = 'Apr 18, 1991, 11:22:33 AM';
+    const expectedDateAndTimeWithFullMonth = 'April 18, 1991 at 3:22:33 PM';
+    const expectedDateAndTimeWithFullMonthUTC = 'April 18, 1991 at 11:22:33 AM';
+
+    test.each([
+        [dateAndTime, false, expectedDateAndTime],
+        [dateAndTime, true, expectedDateAndTimeWithFullMonth],
+        [dateAndTimeUTC, false, expectedDateAndTimeUTC],
+        [dateAndTimeUTC, true, expectedDateAndTimeWithFullMonthUTC],
+        [dateAndTimeString, false, expectedDateAndTimeUTC],
+        [dateAndTimeString, true, expectedDateAndTimeWithFullMonthUTC],
+    ])('formatDateAndTime(%p, %p) => %p', (dateAndTime, fullMonthName, expected) => {
+        expect(formatDateAndTime(dateAndTime, fullMonthName)).toEqual(expected);
     });
 });
 
