@@ -1,12 +1,12 @@
 const DEFAULT_LOCALE = 'en';
 
 /* Format a date (string or Date object) in a user-friendly way. */
-export function formatDate(date, fullMonthName = false) {
+export function formatDate(date, fullMonthName = false, locale = DEFAULT_LOCALE) {
     if (typeof date === 'string') {
         date = new Date(date);
     }
     const monthOption = (fullMonthName ? 'long' : 'short');
-    return new Intl.DateTimeFormat(DEFAULT_LOCALE, {
+    return new Intl.DateTimeFormat(locale, {
         month: monthOption,
         day: 'numeric',
         year: 'numeric',
@@ -15,12 +15,12 @@ export function formatDate(date, fullMonthName = false) {
 }
 
 /* Format a date and time (string or Date object) in a user-friendly way. */
-export function formatDateAndTime(date, fullMonthName = false) {
+export function formatDateAndTime(date, fullMonthName = false, locale = DEFAULT_LOCALE) {
     if (typeof date === 'string') {
         date = new Date(date);
     }
     const monthOption = (fullMonthName ? 'long' : 'short');
-    return new Intl.DateTimeFormat(DEFAULT_LOCALE, {
+    return new Intl.DateTimeFormat(locale, {
         month: monthOption,
         day: 'numeric',
         year: 'numeric',
@@ -32,11 +32,11 @@ export function formatDateAndTime(date, fullMonthName = false) {
 }
 
 /* Return the full name of the weekday (e.g., "Thursday") for the given date (string or Date object). */
-export function formatWeekday(date) {
+export function formatWeekday(date, locale = DEFAULT_LOCALE) {
     if (typeof date === 'string') {
         date = new Date(date);
     }
-    return new Intl.DateTimeFormat(DEFAULT_LOCALE, {weekday: 'long', timeZone: 'GMT'}).format(date);
+    return new Intl.DateTimeFormat(locale, {weekday: 'long', timeZone: 'GMT'}).format(date);
 }
 
 /* Given a numeric score, format the score in a user-friendly way with an optional prefix ("$" by default). */
